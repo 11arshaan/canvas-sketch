@@ -3,27 +3,27 @@ import { randomInt, randomFloat } from "../utility/math";
 
 const settings = {
   dimensions: [2048, 2048],
-  // animate: true,
+  animate: true,
 };
 
 const sketch = ({ width, height }) => {
   const count = 100;
-  const agents = [];
+  const bubbles = [];
   for (let i = 0; i < count; i++) {
     const radius = randomInt(4, 30);
     const x = randomInt(radius, width - radius);
     const y = randomInt(radius, height - radius);
-    agents.push(new Agent(x, y, radius));
+    bubbles.push(new Bubble(x, y, radius));
   }
 
   return ({ context, width, height }) => {
     context.fillStyle = "white";
     context.fillRect(0, 0, width, height);
 
-    agents.forEach((agent) => {
-      agent.update();
-      agent.draw(context);
-      agent.bounce(width, height);
+    bubbles.forEach((bubble) => {
+      bubble.update();
+      bubble.draw(context);
+      bubble.bounce(width, height);
     });
   };
 };
@@ -37,7 +37,7 @@ class Vector {
   }
 }
 
-class Agent {
+class Bubble {
   constructor(x, y, radius) {
     this.radius = radius;
     this.position = new Vector(x, y);

@@ -1,12 +1,26 @@
 const canvasSketch = require('canvas-sketch');
 
+// graph or alpha
+const style = "graph";
+
+let fillColor;
+let strokeColor;
+if (style == "graph") {
+  fillColor = "white";
+  strokeColor = "black";
+} else {
+  fillColor = "transparent";
+  strokeColor = "white";
+}
+
+
 const settings = {
   dimensions: [ 2048, 2048 ],
 };
 
 const sketch = () => {
   return ({ context, width, height }) => {
-    context.fillStyle = 'white';
+    context.fillStyle =  fillColor;
     context.fillRect(0, 0, width, height);
 
     let count = 10;
@@ -19,7 +33,7 @@ const sketch = () => {
 
     for (let i =0; i<count; i++) {
       for (let j =0; j<count; j++) {
-        context.strokeStyle = 'black';
+        context.strokeStyle = strokeColor;
         context.beginPath();
         context.rect(x, y, w, h);
         context.stroke();
@@ -30,10 +44,7 @@ const sketch = () => {
           context.rect(x + 10, y+10, w-20, h-20);
           context.stroke();
         }
-
         x += w + gap;
-
-        
       }
       x = 0;;
       y += h + gap;
@@ -41,5 +52,6 @@ const sketch = () => {
 
   };
 };
+
 
 canvasSketch(sketch, settings);
