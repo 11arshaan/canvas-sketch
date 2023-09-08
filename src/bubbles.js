@@ -66,5 +66,6 @@ class Bubble {
     if (this.position.y <= this.radius || this.position.y >= height - this.radius) {
       this.velocity.y *= -1;
     }
+
   }
 }
